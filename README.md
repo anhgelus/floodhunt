@@ -1,8 +1,6 @@
-# Molehunt
+# Floodhunt
 
-Molehunt is a Minecraft mod creating the game with the same name in this cubic game.
-
-A complete wiki is available [here](https://william.herges.fr/molehunt/introduction.html).
+Floodhunt is a Minecraft mod creating the game with the same name in this cubic game.
 
 ## Usage
 
@@ -10,7 +8,7 @@ Install the mod on the server and on all clients.
 
 Install [Simple Voice Chat](http://modrinth.com/mod/simple-voice-chat).
 
-Start the game with `/molehunt start` and enjoy!
+Start the game with `/floodhunt start` and enjoy!
 
 ## Features
 
@@ -24,9 +22,9 @@ Death and advancement messages are disabled.
 
 World borders are set when starting and slowly shrink over the entire game.
 
-The mod stops the game when every innocent is dead or when the timer ended.
+The mod stops the game when every innocent is infected or when the timer ended.
 
-The moles can see the name of other moles with `/molehunt moles`.
+The moles can see the name of other moles with `/floodhunt role`.
 
 Disable the nether, the end and every other portal.
 
@@ -35,10 +33,7 @@ _Almost_ everything in the mod can configured.
 ## Configuration
 
 To change most values, you can play with the gamerules added by the mod with the
-`/gamerule` command. Every gamerule introduced by the mod starts with `molehunt:`.
-
-To dive deeper into the
-configuration, [an online wiki is available](https://william.herges.fr/molehunt/configuration.html).
+`/gamerule` command. Every gamerule introduced by the mod starts with `floodhunt:`.
 
 ## Technologies
 
@@ -50,4 +45,4 @@ configuration, [an online wiki is available](https://william.herges.fr/molehunt/
 
 Creator of the default skin used is unknown.
 
-Thanks @leo-210 for the help!
+Based on my [Molehunt mod](https://modrinth.com/mod/molehunt-mod).
