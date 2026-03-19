@@ -43,54 +43,17 @@ public class Floodhunt implements ModInitializer {
 	public static final String MOD_ID = "floodhunt";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static final SimpleConfig CONFIG_FILE = Config.configFile(MOD_ID);
-	public static final GameRule<Integer> GAME_DURATION = GameRuleBuilder
-		.forInteger(CONFIG_FILE.getOrDefault("game_duration", 90))
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "game_duration_minutes"));
-	public static final GameRule<Integer> MOLE_PERCENTAGE = GameRuleBuilder
-		.forInteger(CONFIG_FILE.getOrDefault("mole_percentage", 25))
-		.range(0, 100)
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "mole_percentage"));
-	public static final GameRule<Integer> MOLE_COUNT = GameRuleBuilder
-		.forInteger(CONFIG_FILE.getOrDefault("mole_count", -1))
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "mole_count"));
-	public static final GameRule<Boolean> SHOW_NAMETAGS = GameRuleBuilder
-		.forBoolean(CONFIG_FILE.getOrDefault("show_nametags", false))
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "show_nametags"));
-	public static final GameRule<Boolean> SHOW_TAB = GameRuleBuilder
-		.forBoolean(CONFIG_FILE.getOrDefault("show_tab", false))
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "show_tab"));
-	public static final GameRule<Boolean> SHOW_SKINS = GameRuleBuilder
-		.forBoolean(CONFIG_FILE.getOrDefault("show_skins", false))
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "show_skins"));
-	public static final GameRule<Integer> INITIAL_WORLD_SIZE = GameRuleBuilder
-		.forInteger(CONFIG_FILE.getOrDefault("initial_world_size", 600))
-		.minValue(0)
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "initial_world_size"));
-	public static final GameRule<Integer> FINAL_WORLD_SIZE = GameRuleBuilder
-		.forInteger(CONFIG_FILE.getOrDefault("final_world_size", 100))
-		.minValue(0)
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "final_world_size"));
-	public static final GameRule<Integer> MOVING_STARTING_TIME_OFFSET = GameRuleBuilder
-		.forInteger(CONFIG_FILE.getOrDefault("border_moving_starting_time_offset", 30))
-		.minValue(0)
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "border_moving_starting_time_offset_minutes"));
-	public static final GameRule<Boolean> ENABLE_PORTALS = GameRuleBuilder
-		.forBoolean(CONFIG_FILE.getOrDefault("enable_portals", false))
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "enable_portals"));
-	public static final GameRule<Boolean> FOOD_ON_START = GameRuleBuilder
-		.forBoolean(CONFIG_FILE.getOrDefault("food_on_start", true))
-		.category(GameRuleCategory.MISC)
-		.buildAndRegister(Identifier.of(MOD_ID, "food_on_start"));
+	public static final GameRule<Integer> GAME_DURATION = createGameRule("game_duration", 90, 0);
+	public static final GameRule<Integer> MOLE_PERCENTAGE = createGameRule("flood_percentage", 25, 0, 100);
+	public static final GameRule<Integer> MOLE_COUNT = createGameRule("flood_count", -1, -1);
+	public static final GameRule<Boolean> SHOW_NAMETAGS = createGameRule("show_nametags", false);
+	public static final GameRule<Boolean> SHOW_TAB = createGameRule("show_tab", false);
+	public static final GameRule<Boolean> SHOW_SKINS = createGameRule("show_skins", false);
+	public static final GameRule<Integer> INITIAL_WORLD_SIZE = createGameRule("initial_world_size", 600, 0);
+	public static final GameRule<Integer> FINAL_WORLD_SIZE = createGameRule("final_world_size", 100, 0);
+	public static final GameRule<Integer> MOVING_STARTING_TIME_OFFSET = createGameRule("border_moving_starting_time_offset", 30, 0);
+	public static final GameRule<Boolean> ENABLE_PORTALS = createGameRule("enable_portals", false);
+	public static final GameRule<Boolean> FOOD_ON_START = createGameRule("food_on_start", true);
 	public static Config CONFIG;
 	public static HashMap<UUID, Boolean> timerVisibility = new HashMap<>();
 
@@ -101,6 +64,22 @@ public class Floodhunt implements ModInitializer {
 	}
 
 	public Game game;
+
+	private static <T> GameRule<T> createGameRule(String key, GameRuleBuilder<T> builder) {
+		return builder.category(GameRuleCategory.MISC).buildAndRegister(Identifier.of(MOD_ID, key));
+	}
+
+	private static GameRule<Boolean> createGameRule(String key, boolean def) {
+		return createGameRule(key, GameRuleBuilder.forBoolean(CONFIG_FILE.getOrDefault(key, def)));
+	}
+
+	private static GameRule<Integer> createGameRule(String key, int def, int min) {
+		return createGameRule(key, GameRuleBuilder.forInteger(CONFIG_FILE.getOrDefault(key, def)).minValue(min));
+	}
+
+	private static GameRule<Integer> createGameRule(String key, int def, int min, int max) {
+		return createGameRule(key, GameRuleBuilder.forInteger(CONFIG_FILE.getOrDefault(key, def)).range(min, max));
+	}
 
 	private static <T> void sendConfigPayload(T v, MinecraftServer server) {
 		if (CONFIG == null) return;
