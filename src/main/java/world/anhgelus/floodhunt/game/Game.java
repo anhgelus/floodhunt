@@ -121,7 +121,7 @@ public class Game {
 		end();
 	}
 
-	public void end() {
+	private void end() {
 		final var timer = TimerAccess.getTimerFromOverworld(server);
 		timer.floodhunt_cancel();
 
@@ -197,5 +197,13 @@ public class Game {
 		started = hasStarted;
 		final var payload = new GamePayload(hasStarted);
 		server.getPlayerManager().sendToAll(ServerPlayNetworking.createS2CPacket(payload));
+	}
+
+	public void onRespawn(ServerPlayerEntity player) {
+		infected.add(player.getUuid());
+		if (wonByInfected()) end();
+		player.changeGameMode(GameMode.SURVIVAL);
+		player.sendMessage(Text.translatable("floodhunt.game.infected"));
+		player.sendMessage(Text.translatable("floodhunt.game.start.mole.subtitle"));
 	}
 }

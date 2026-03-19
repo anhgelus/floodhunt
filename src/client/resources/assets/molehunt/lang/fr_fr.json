@@ -16,6 +16,7 @@
 	"floodhunt.game.start.mole.subtitle": "§eRécupérer la liste des infecté(e)s avec §6/floodhunt role",
 	"floodhunt.game.start.survivor.title": "§aPas infecté(e)s!",
 	"floodhunt.game.start.survivor.subtitle": "§eEssayez de survivre et de trouver qui est infecté !",
+	"floodhunt.game.infected": "§cVous êtes infecté(e)s.",
 	"gamerule.floodhunt:game_duration": "Floodhunt : Durée d'une partie",
 	"gamerule.floodhunt:flood_percentage": "Floodhunt : Pourcentage d'infecté(e)s",
 	"gamerule.floodhunt:flood_count": "Floodhunt : Nombre d'infectés (-1 pour utiliser le pourcentage à la place)",
