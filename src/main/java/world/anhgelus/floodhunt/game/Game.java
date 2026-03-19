@@ -88,8 +88,8 @@ public class Game {
 			playerManager.getPlayerList().forEach(p -> {
 				p.networkHandler.sendPacket(timing);
 				if (infected.contains(p.getUuid())) {
-					p.networkHandler.sendPacket(new TitleS2CPacket(Text.translatable("floodhunt.game.start.mole.title")));
-					p.networkHandler.sendPacket(new SubtitleS2CPacket(Text.translatable("floodhunt.game.start.mole.subtitle")));
+					p.networkHandler.sendPacket(new TitleS2CPacket(Text.translatable("floodhunt.game.start.infected.title")));
+					p.networkHandler.sendPacket(new SubtitleS2CPacket(Text.translatable("floodhunt.game.start.infected.subtitle")));
 				} else {
 					p.networkHandler.sendPacket(new TitleS2CPacket(Text.translatable("floodhunt.game.start.survivor.title")));
 					p.networkHandler.sendPacket(new SubtitleS2CPacket(Text.translatable("floodhunt.game.start.survivor.subtitle")));
@@ -140,7 +140,7 @@ public class Game {
 		timer.floodhunt_runTask(new TickTask(() -> {
 			TitleS2CPacket winner;
 			if (wonByInfected()) {
-				winner = new TitleS2CPacket(Text.translatable("floodhunt.game.end.winners.moles.title"));
+				winner = new TitleS2CPacket(Text.translatable("floodhunt.game.end.winners.infected.title"));
 			} else {
 				winner = new TitleS2CPacket(Text.translatable("floodhunt.game.end.winners.survivors.title"));
 			}
@@ -178,8 +178,8 @@ public class Game {
 	}
 
 	public boolean wonByInfected() {
-		final var moles = getInfected().map(PlayerEntity::getUuid).collect(Collectors.toSet());
-		return !moles.isEmpty() && moles.containsAll(
+		final var infecteds = getInfected().map(PlayerEntity::getUuid).collect(Collectors.toSet());
+		return !infecteds.isEmpty() && infecteds.containsAll(
 			server.getPlayerManager()
 				.getPlayerList()
 				.stream()
@@ -204,6 +204,6 @@ public class Game {
 		if (wonByInfected()) end();
 		player.changeGameMode(GameMode.SURVIVAL);
 		player.sendMessage(Text.translatable("floodhunt.game.infected"));
-		player.sendMessage(Text.translatable("floodhunt.game.start.mole.subtitle"));
+		player.sendMessage(Text.translatable("floodhunt.game.start.infected.subtitle"));
 	}
 }
