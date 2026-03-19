@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "world.anhgelus.floodhunt.client.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"NoCustomizableSkinOverlay",
+		"NoNametags",
+		"NoPlayerListHud",
+		"NoSkin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
