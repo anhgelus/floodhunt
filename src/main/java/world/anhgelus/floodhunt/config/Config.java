@@ -98,11 +98,11 @@ public class Config {
 		return server.getOverworld().getGameRules().getValue(Floodhunt.GAME_DURATION);
 	}
 
-	public int getMolePercentage() {
+	public int getFloodPercentage() {
 		return server.getOverworld().getGameRules().getValue(Floodhunt.MOLE_PERCENTAGE);
 	}
 
-	public int getMoleCount() {
+	public int getFloodCount() {
 		return server.getOverworld().getGameRules().getValue(Floodhunt.MOLE_COUNT);
 	}
 

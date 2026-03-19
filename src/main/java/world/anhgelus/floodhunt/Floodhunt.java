@@ -137,7 +137,7 @@ public class Floodhunt implements ModInitializer {
 				final var player = source.getPlayer();
 				assert player != null;
 
-				if (game.isMole(player)) {
+				if (game.isInfected(player)) {
 					source.sendFeedback(
 						() -> Text.translatable("commands.floodhunt.role.mole")
 							.append("\n\n")
@@ -145,13 +145,13 @@ public class Floodhunt implements ModInitializer {
 						false);
 				} else if (player.isSpectator()) {
 					source.sendFeedback(
-						() -> Text.translatable("commands.floodhunt.role.survivor.mole_count", game.getMolesCount()),
+						() -> Text.translatable("commands.floodhunt.role.survivor.mole_count", game.getInfectedCount()),
 						false);
 				} else {
 					source.sendFeedback(
 						() -> Text.translatable("commands.floodhunt.role.survivor")
 							.append("\n\n")
-							.append(Text.translatable("commands.floodhunt.role.survivor.mole_count", game.getMolesCount())),
+							.append(Text.translatable("commands.floodhunt.role.survivor.mole_count", game.getInfectedCount())),
 						false);
 				}
 
@@ -178,7 +178,7 @@ public class Floodhunt implements ModInitializer {
 		ServerLivingEntityEvents.AFTER_DEATH.register((entity, damageSource) -> {
 			if (!(entity instanceof ServerPlayerEntity) || game == null) return;
 			if (!game.started()) return;
-			if (game.wonByMoles()) game.end();
+			if (game.wonByInfected()) game.end();
 		});
 
 		ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {

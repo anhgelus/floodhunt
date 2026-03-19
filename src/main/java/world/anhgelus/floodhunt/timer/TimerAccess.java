@@ -24,14 +24,14 @@ public interface TimerAccess {
 	 *
 	 * @param task Task to run
 	 */
-	void dds_runTask(TimerAccess.TickTask task);
+	void floodhunt_runTask(TimerAccess.TickTask task);
 
-	void dds_cancel();
+	void floodhunt_cancel();
 
 	/**
 	 * @return All non-cancelled tasks
 	 */
-	List<TickTask> dds_getTasks();
+	List<TickTask> floodhunt_getTasks();
 
 	interface TickTask {
 		/**
@@ -43,14 +43,14 @@ public interface TimerAccess {
 		 * Cancel the task
 		 *
 		 * @return the remaining ticks before the run of the Task
-		 * @throws IllegalStateException if the task is already cancelled
+		 * @throws IllegalStateException if the task is already canceled
 		 */
 		long cancel();
 
 		boolean isRunning();
 
 		/**
-		 * @return the number of ticks before run of the task (if the task is cancelled, returns -1)
+		 * @return the number of ticks before run of the task (if the task is canceled, returns -1)
 		 */
 		long getTickingBeforeRun();
 	}
