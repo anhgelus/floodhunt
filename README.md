@@ -43,6 +43,6 @@ To change most values, you can play with the gamerules added by the mod with the
 
 ## Credits
 
-Creator of the default skin used is unknown.
+Creator of the default skin used is Kelmdel.
 
 Based on my [Molehunt mod](https://modrinth.com/mod/molehunt-mod).

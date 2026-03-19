@@ -33,11 +33,11 @@ public class FloodhuntClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		ClientPlayNetworking.registerGlobalReceiver(ConfigPayload.ID, (payload, context) -> context.client().execute(() -> {
+		ClientPlayNetworking.registerGlobalReceiver(ConfigPayload.ID, (payload, context) -> {
 			SHOW_SKINS = payload.showSkins();
 			SHOW_NAMETAGS = payload.showNametags();
 			SHOW_TAB = payload.showTab();
-		}));
+		});
 		ClientPlayNetworking.registerGlobalReceiver(GamePayload.ID, (payload, context) -> context.client().execute(() -> GAME_STARTED = payload.gameLaunched()));
 
 		// Needed because else `client.options` is null

@@ -21,7 +21,7 @@ public class NoSkin {
 			new AssetInfo.TextureAssetInfo(Identifier.of(Floodhunt.MOD_ID, "skin")),
 			null,
 			null,
-			PlayerSkinType.WIDE
+			PlayerSkinType.SLIM
 		));
 	}
 }
